@@ -59,12 +59,12 @@ public class PascalTrangle
 
     public static void main(String[] args)
     {
-        List<List<Integer>> createPascalTrangle = PascalTrangle.createPascalTrangle(5);
-        System.out.println(createPascalTrangle);
+      //  List<List<Integer>> createPascalTrangle = PascalTrangle.createPascalTrangle(5);
+       // System.out.println(createPascalTrangle);
 
         List<Integer> pascalTrangleRow = PascalTrangle.getPascalTrangleRow(3);
 
-        System.out.println(pascalTrangleRow);
+       System.out.println(pascalTrangleRow);
 
     }
 

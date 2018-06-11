@@ -31,7 +31,7 @@ public class GasSatation
         int sumRemaining = 0;
         for (int i = 0; i < gas.length; i++)
         {
-            remaining = cost[i] - gas[i];
+            remaining =  gas[i]-cost[i];
 
             if (sumRemaining >= 0)
             {
@@ -52,7 +52,7 @@ public class GasSatation
             return start;
         }
 
-        return 1;
+        return -1;
 
     }
 
@@ -60,7 +60,7 @@ public class GasSatation
     {
         GasSatation gasSatation = new GasSatation();
         int[] cost =
-        { 1, 3, 2, 4, 5 };
+        { 2, 3, 2, 4, 5 };
         int[] gas =
         { 1, 2, 3, 4, 5 };
         gasSatation.canCompleteCircuit(cost, gas);
