@@ -75,8 +75,10 @@ public class WordSearch {
 			} else if (search(grid, r, c + -1, s, visted)) {
 				return true;
 			} else {
+				
 				return false;
 			}
+			
 
 		} else {
 			grid[r][c] = '#';
@@ -93,17 +95,17 @@ public class WordSearch {
 				{ 'A', 'D', 'E', 'E' }
 
 		};
-	//	System.out.println(search("ABCB", m));
+		System.out.println(search("ABC", m));
 
 	//	System.out.println(dfs(m, "ABCB", 0, 0, 0));
 
-		char[][] b = { { 'o', 'a', 'a', 'n' }, { 'e', 't', 'a', 'e' }, { 'i', 'h', 'k', 'r' }, { 'i', 'f', 'l', 'v' } };
+		//char[][] b = { { 'o', 'a', 'a', 'n' }, { 'e', 't', 'a', 'e' }, { 'i', 'h', 'k', 'r' }, { 'i', 'f', 'l', 'v' } };
 
-		String[] w = { "oath", "pea", "eat", "rain" };
+		//String[] w = { "oath", "pea", "eat", "rain" };
 
-		WordSearch ws = new WordSearch();
-		List<String> findWords = ws.findWords(b, w);
-		System.out.println(findWords);
+		//WordSearch ws = new WordSearch();
+		//List<String> findWords = ws.findWords(b, w);
+		//System.out.println(findWords);
 		
 	}
 

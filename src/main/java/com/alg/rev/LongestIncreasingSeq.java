@@ -12,11 +12,7 @@ public class LongestIncreasingSeq {
 		int[][] mem = new int[matrix.length][matrix[0].length];
 		int longest = 0;
 
-		/*
-		 * for (int i = 0; i < matrix.length; i++) { for (int j = 0; j <
-		 * matrix[0].length-1; j++) { mem[i][j]=-1; } }
-		 */
-
+		
 		for (int i = 0; i < matrix.length; i++) {
 			for (int j = 0; j < matrix[0].length - 1; j++) {
 				longest = Math.max(longest, dfs(matrix, i, j, mem));
@@ -49,7 +45,7 @@ public class LongestIncreasingSeq {
 		int[] max = new int[1];
 		for (int i = 0; i < matrix.length; i++) {
 			for (int j = 0; j < matrix[0].length-1; j++) {
-				dfs(matrix, i, j, max, 1);
+				dfs(matrix, i, j, max, 0);
 			}
 		}
 
@@ -71,6 +67,7 @@ public class LongestIncreasingSeq {
 			int y = j + dy[k];
 
 			if (x >= 0 && x < m && y >= 0 && y < n && matrix[x][y] > matrix[i][j]) {
+				System.err.println( matrix[x][y] + "  >"+ matrix[i][j]);
 				dfs(matrix, x, y, max, len + 1);
 			}
 		}
@@ -82,9 +79,9 @@ public class LongestIncreasingSeq {
 					  { 9, 7, 8,10 }, 
 					  { 2, 5, 7, 1 } };
 
-		//System.out.println(longestIncreasingPath(m));
+		System.out.println(longestIncreasingPath(m));
 		
-		System.out.println(longestIncreasingPath(m,true));
+		//System.out.println(longestIncreasingPath(m,true));
 		
 		
 
