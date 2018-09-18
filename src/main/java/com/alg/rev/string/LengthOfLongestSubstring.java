@@ -62,17 +62,16 @@ public class LengthOfLongestSubstring {
 				if (Math.max(logestSubString, end) > logestSubString) {
 					logestSubString = Math.max(logestSubString, end);
 					startindex = start;
-					endindex=CharCount-1;
+					endindex = CharCount - 1;
 					start = CharCount;
-					uniqueCharCount = 0;					
+					uniqueCharCount = 0;
 					flags = new boolean[256];
 				}
 
-				
 			}
 
 		}
-		return str.substring(startindex, endindex<=0 ? CharCount-1:endindex);
+		return str.substring(startindex, endindex <= 0 ? CharCount - 1 : endindex);
 
 	}
 
@@ -179,10 +178,41 @@ public class LengthOfLongestSubstring {
 					currentMap.clear();
 					start = i + len;
 					count = 0;
+					
 				}
 			}
 		}
 
 		return result;
+	}
+
+	public static int lenOfCommonSubString(String first, String second) {
+
+		int row = first.length();
+
+		int col = second.length();
+
+		int dp[][] = new int[row][col];
+		int max = 0;
+		for (int r = 0; r < row; row++) {
+
+			for (int c = 0; c < col; c++) {
+
+				if (first.charAt(r) == second.charAt(c)) {
+
+					if (r == 0 && c == 0) {
+						dp[r][c] = 1;
+					} else {
+						dp[r][c] = dp[r - 1][c - 1] + 1;
+					}
+
+					max = Math.max(max, dp[r][c]);
+				}
+
+			}
+
+		}
+		return max;
+
 	}
 }

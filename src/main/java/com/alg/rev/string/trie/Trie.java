@@ -39,7 +39,7 @@ public class Trie {
 
 	public boolean search(String value) {
 		Node curent = root;
-		int count = 0;
+		
 		for (Character c : value.toCharArray()) {
 			Node childNode = curent.findSubNode(c);
 			if (childNode != null) {
@@ -96,8 +96,7 @@ public class Trie {
 
 		@Override
 		public String toString() {
-			return "Node [data=" + data + ", isEnd=" + isEnd + ", nodes="
-					+ nodes + "]";
+			return "Node [data=" + data + ", isEnd=" + isEnd + ", nodes=" + nodes + "]";
 		}
 
 	}

@@ -1,4 +1,4 @@
-package com.alg.rev;
+package com.alg.rev.matrix;
 
 public class LongestIncreasingSeq {
 
@@ -12,7 +12,6 @@ public class LongestIncreasingSeq {
 		int[][] mem = new int[matrix.length][matrix[0].length];
 		int longest = 0;
 
-		
 		for (int i = 0; i < matrix.length; i++) {
 			for (int j = 0; j < matrix[0].length - 1; j++) {
 				longest = Math.max(longest, dfs(matrix, i, j, mem));
@@ -27,6 +26,7 @@ public class LongestIncreasingSeq {
 			return mem[i][j];
 
 		for (int m = 0; m < 4; m++) {
+			
 			int x = i + dx[m];
 			int y = j + dy[m];
 
@@ -38,13 +38,13 @@ public class LongestIncreasingSeq {
 		return ++mem[i][j];
 	}
 
-	public static int longestIncreasingPath(int[][] matrix,boolean sceond) {
+	public static int longestIncreasingPath(int[][] matrix, boolean sceond) {
 		if (matrix == null || matrix.length == 0 || matrix[0].length == 0)
 			return 0;
 
 		int[] max = new int[1];
 		for (int i = 0; i < matrix.length; i++) {
-			for (int j = 0; j < matrix[0].length-1; j++) {
+			for (int j = 0; j < matrix[0].length - 1; j++) {
 				dfs(matrix, i, j, max, 0);
 			}
 		}
@@ -57,7 +57,7 @@ public class LongestIncreasingSeq {
 		max[0] = Math.max(max[0], len);
 
 		int m = matrix.length;
-		int n = matrix[0].length-1;
+		int n = matrix[0].length - 1;
 
 		int[] dx = { -1, 0, 1, 0 };
 		int[] dy = { 0, 1, 0, -1 };
@@ -67,7 +67,7 @@ public class LongestIncreasingSeq {
 			int y = j + dy[k];
 
 			if (x >= 0 && x < m && y >= 0 && y < n && matrix[x][y] > matrix[i][j]) {
-				System.err.println( matrix[x][y] + "  >"+ matrix[i][j]);
+				System.err.println(matrix[x][y] + "  >" + matrix[i][j]);
 				dfs(matrix, x, y, max, len + 1);
 			}
 		}
@@ -75,15 +75,11 @@ public class LongestIncreasingSeq {
 
 	public static void main(String[] args) {
 
-		int m[][] = { { 3, 3, 4, 5 }, 
-					  { 9, 7, 8,10 }, 
-					  { 2, 5, 7, 1 } };
+		int m[][] = { { 3, 3, 4, 5 }, { 9, 7, 8, 10 }, { 2, 5, 7, 1 } };
 
 		System.out.println(longestIncreasingPath(m));
-		
-		//System.out.println(longestIncreasingPath(m,true));
-		
-		
+
+		// System.out.println(longestIncreasingPath(m,true));
 
 	}
 

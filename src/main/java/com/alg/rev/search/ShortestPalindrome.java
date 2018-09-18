@@ -5,6 +5,7 @@ public class ShortestPalindrome {
 	public static String shortestPalindrome(String s) {
 		if (s == null || s.length() <= 1)
 			return s;
+		
 
 		String result = null;
 

@@ -20,7 +20,7 @@ public class RotatedSortedArray
             return Math.min(num[left], num[right]);
         }
 
-        int middle = (right - left) / 2;
+        int middle = (right - left) / 2; 
         if (num[right] > num[left])
         {
             return num[left];

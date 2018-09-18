@@ -946,10 +946,18 @@ public class TreeSolution {
 		 * System.err.println(temp.value); System.out.println(inorderSuccessor(temp));
 		 */
 
-		List<List<Integer>> leafs = new ArrayList<List<Integer>>();
-		findleaves(leafs, root);
+		// List<List<Integer>> leafs = new ArrayList<List<Integer>>();
+		// findleaves(leafs, root);
 
-		System.err.println(leafs);
+		// System.err.println(leafs);
+
+		int[] t = { 1, 2, 3, 4, 5, 6 };
+		SumRangeTree buildSumRangeTree = buildSumRangeTree(t, 0, t.length - 1);
+
+		System.out.println(sumofRanges(buildSumRangeTree, 0, 6));
+		updateSum(buildSumRangeTree, 10, 3);
+
+		System.out.println(sumofRanges(buildSumRangeTree, 0, 6));
 
 	}
 
@@ -1031,6 +1039,130 @@ public class TreeSolution {
 			}
 			return result;
 		}
+
+	}
+
+	public class SumRangeTree {
+
+		private int start;
+		private int end;
+		private int sum;
+
+		private SumRangeTree left;
+		private SumRangeTree right;
+
+		public SumRangeTree(int s, int r) {
+			this.start = s;
+			this.end = r;
+		}
+
+		public int getStart() {
+			return start;
+		}
+
+		public void setStart(int start) {
+			this.start = start;
+		}
+
+		public int getEnd() {
+			return end;
+		}
+
+		public void setEnd(int end) {
+			this.end = end;
+		}
+
+		public int getSum() {
+			return sum;
+		}
+
+		public void setSum(int sum) {
+			this.sum = sum;
+		}
+
+		public SumRangeTree getLeft() {
+			return left;
+		}
+
+		public void setLeft(SumRangeTree left) {
+			this.left = left;
+		}
+
+		public SumRangeTree getRight() {
+			return right;
+		}
+
+		public void setRight(SumRangeTree right) {
+			this.right = right;
+		}
+
+		@Override
+		public String toString() {
+			StringBuffer sb = new StringBuffer();
+			sb.append("Start :" + start);
+			sb.append("End :" + end);
+			sb.append("Value :" + sum);
+			return sb.toString();
+		}
+
+	}
+
+	private SumRangeTree buildSumRangeTree(int[] a, int left, int right) {
+
+		if (left < right && left > a.length && right < a.length)
+			return null;
+		SumRangeTree node;
+		if (left == right) {
+			node = new SumRangeTree(left, right);
+			node.setSum(a[left]);
+			return node;
+		} else {
+
+			int mid = left + (right - left) / 2;
+			node = new SumRangeTree(left, right);
+			node.setLeft(buildSumRangeTree(a, left, mid));
+			node.setRight(buildSumRangeTree(a, mid + 1, right));
+
+			node.setSum(node.getLeft().getSum() + node.getRight().getSum());
+		}
+
+		return node;
+	}
+
+	public void updateSum(SumRangeTree root, int val, int pos) {
+
+		if (root == null)
+			return;
+		int mid = root.getStart() + (root.getEnd() - root.getStart()) / 2;
+
+		if (root.getStart()==root.getEnd()&& root.getStart() == pos) {
+			root.setSum(val);
+			return;
+		}
+		if (pos <= mid) {
+			updateSum(root.getLeft(), val, pos);
+		} else {
+			updateSum(root.getRight(), val, pos);
+		}
+		if (root != null && root.getLeft() != null && root.getRight() != null)
+			root.setSum(root.getLeft().getSum() + root.getRight().getSum());
+	}
+
+	public int sumofRanges(SumRangeTree root, int i, int j) {
+		if (root == null)
+			return -1;
+		int mid = root.getStart() + (root.getEnd() - root.getStart()) / 2;
+		if (i<=root.getStart() && j>=root.getEnd()) {
+			return root.getSum();
+		}
+		int res = 0;
+		if (root.getStart() < j) {
+
+			res += sumofRanges(root.getLeft(), i, mid);
+		} else {
+			res += sumofRanges(root.getLeft(), mid + 1, j);
+		}
+		return res;
 
 	}
 
