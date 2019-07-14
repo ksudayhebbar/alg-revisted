@@ -21,7 +21,7 @@ public class CountAndSay {
 				if (result.charAt(j) == result.charAt(j - 1)) {
 
 					count++;
-				}else {
+				} else {
 					sb.append(count);
 					sb.append(result.charAt(j - 1));
 					count = 1;
@@ -34,7 +34,7 @@ public class CountAndSay {
 			sb.append(result.charAt(result.length() - 1));
 
 			result += sb.toString();
-			
+
 			i++;
 		}
 		return result;

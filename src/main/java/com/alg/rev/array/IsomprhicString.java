@@ -23,8 +23,8 @@ public class IsomprhicString {
 
 	public static void main(String[] args) {
 
-		//isIsomorphic("egg", "add");
-		 isIsomorphic("foo", "bar");
+		// isIsomorphic("egg", "add");
+		isIsomorphic("foo", "bar");
 		// isIsomorphic("paper", "title");
 	}
 

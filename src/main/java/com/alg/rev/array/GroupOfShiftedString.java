@@ -57,7 +57,7 @@ public class GroupOfShiftedString {
 
 		char[] tempChar = new char[str.length()];
 		int i = 0;
-		
+
 		for (Character c : str.toCharArray()) {
 
 			if (c >= 'a' && c <= 'z') {

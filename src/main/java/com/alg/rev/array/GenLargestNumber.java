@@ -20,8 +20,8 @@ public class GenLargestNumber {
 		Arrays.sort(strNums, new Comparator<String>() {
 
 			public int compare(String a, String b) {
-				System.out.println("Compreing :"+b+a +" -->"+a+b);
-				return (b+a).compareTo(a + b);
+				System.out.println("Compreing :" + b + a + " -->" + a + b);
+				return (b + a).compareTo(a + b);
 			}
 
 		});
