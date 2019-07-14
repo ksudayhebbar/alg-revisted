@@ -1,55 +1,48 @@
 package com.alg.rev.stack;
 
-import java.util.EmptyStackException;
+import java.util.Stack;
 
 public class MinStack implements IMinStatck
 {
-    private Entry top = null;
-
-    public void push(int x)
-    {
-        if (top == null)
-        {
-
-            top = new Entry(x, null);
-        } else
-        {
-            Entry ele = new Entry(Math.min(x, top.getValue()), top);
-
-            top = ele;
-        }
-
+	private Stack<Integer>  st;
+    private int min =Integer.MAX_VALUE;   
+    /** initialize your data structure here. */
+    public MinStack() {
+            
+      st=new Stack<Integer>();      
+        
     }
-
-    public int pop() throws EmptyStackException
-    {
-        int retValue = -1;
-        if (top != null)
-        {
-            retValue = top.getValue();
-
-            top = top.getNext();
-        } else
-        {
-            throw new EmptyStackException();
-        }
-        return retValue;
+    
+    public void push(int x) {
+          if(x<=min)  {
+            st.push(min);
+            min=x;
+          }
+          st.push(x);
     }
-
-    public int getMin()
-    {
-        int retValue = -1;
-        if (top != null)
-        {
-            retValue = top.getValue();
-
-        } else
-        {
-            throw new EmptyStackException();
-        }
-        return retValue;
+    
+    public void pop() {
+        if(st.peek()==min){
+                st.pop();
+                min=st.peek();
+                st.pop();
+        } else{
+                st.pop();
+        }  
+         
+         if(st.isEmpty()){
+               min =Integer.MAX_VALUE;
+         }   
+        
     }
-
+    
+    public int top() {
+        return st.peek();
+    }
+    
+    public int getMin() {
+        return min;
+    }
     public class Entry
     {
         private int value;
@@ -89,21 +82,23 @@ public class MinStack implements IMinStatck
     {
         MinStack minStack=new MinStack();
         
-        minStack.push(5);
-        minStack.push(3);
-        minStack.push(2);
-        minStack.push(1);
+        minStack.push(-2);
+        minStack.push(0);
+        minStack.push(-3);
+       // minStack.push(2);
+       // minStack.push(1);
        
-        System.out.println("pop "+minStack.pop());
+        minStack.pop();
       
         
         System.out.println("Min "+minStack.getMin());
-        System.out.println("pop "+ minStack.pop());
+        minStack.pop();
         System.out.println("Min "+ minStack.getMin());
         
-         System.out.println(minStack.pop());
-        System.out.println(minStack.pop());
+         minStack.pop();
+        //System.out.println(minStack.pop());
         
-
+        
+       
     }
 }

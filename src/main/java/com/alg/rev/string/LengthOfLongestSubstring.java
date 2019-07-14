@@ -35,6 +35,9 @@ public class LengthOfLongestSubstring {
 		return Math.max(logestSubString, CharCount - start);
 
 	}
+	
+	
+	
 
 	public static String lengthOfLongestSubstringWithUniqueChar(String str, int num) {
 		if (str == null)

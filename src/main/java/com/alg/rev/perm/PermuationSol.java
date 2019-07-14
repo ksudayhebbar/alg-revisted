@@ -1,3 +1,5 @@
+package com.alg.rev.perm;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -5,6 +7,33 @@ import java.util.List;
 import java.util.Set;
 
 public class PermuationSol {
+
+	public static List<List<Integer>> findSubsequences(int[] nums) {
+
+		List<Integer> cur = new ArrayList<Integer>();
+		Set<List<Integer>> result = new HashSet<List<Integer>>();
+		findSubsequences(nums, 0, cur, result);
+		return new ArrayList(result);
+	}
+
+	public static void findSubsequences(int[] nums, int start, List<Integer> cur, Set<List<Integer>> result) {
+
+		if (cur.size() >= 2) {
+			result.add(new ArrayList<Integer>(cur));
+
+		}
+
+		for (int i = start; i < nums.length; i++) {
+
+			if (cur.size() == 0 || cur.get(cur.size() - 1) <= nums[i]) {
+				cur.add(nums[i]);
+				findSubsequences(nums, i + 1, cur, result);
+
+				cur.remove(cur.size() - 1);
+			}
+		}
+
+	}
 
 	public static List<String> generateParenthesis(int n) {
 
@@ -35,6 +64,8 @@ public class PermuationSol {
 	}
 
 	public static Set<List<Integer>> permuate1(int[] num, int start) {
+		 
+	
 		Set<List<Integer>> retList = new HashSet<List<Integer>>();
 		if (start == num.length) {
 			List<Integer> tempList = new ArrayList<Integer>();
@@ -42,6 +73,7 @@ public class PermuationSol {
 				tempList.add(n);
 
 			}
+		
 			retList.add(tempList);
 			return retList;
 
@@ -108,8 +140,8 @@ public class PermuationSol {
 		List<List<Integer>> result = new ArrayList<List<Integer>>();
 		int start = 0;
 		Arrays.sort(num);
-		// combinationSum(num, start, cur, target, result);
-		combinationUniqueSum(num, start, cur, target, result);
+		 combinationSum(num, start, cur, target, result);
+		//combinationUniqueSum(num, start, cur, target, result);
 		return result;
 
 	}
@@ -195,7 +227,7 @@ public class PermuationSol {
 	}
 
 	public static void main(String[] args) {
-		// System.out.println(permuate1(new int[] { 1, 2, 3 }, 0));
+		System.out.println(permuate1(new int[] { 1, 2, 3 }, 0));
 		// System.out.println(permuate1(new int[] { 1, 1, 2 }, 0));
 
 		// System.out.println(subSet(new int[] { 1, 2, 3 }, 0));
@@ -203,11 +235,14 @@ public class PermuationSol {
 		// System.out.println(generateParenthesis(3));
 
 		// System.out.println(combinationDp(new int[] { 2, 3, 6, 7 }, 7));
-		List<List<Integer>> result = new ArrayList<List<Integer>>();
+		//List<List<Integer>> result = new ArrayList<List<Integer>>();
 		// uniquecombination(4, 3, 1, new ArrayList<Integer>(), result);
 		// System.out.println(result);
 		// System.out.println(restoreIpaddress("25525511135"));
-		System.out.println(factorCombination(16));
+		//System.out.println(factorCombination(16));
+		//findSubsequences(new int[] {4,6,7,7});
+		
+		//combinationSum(new int[] {2},3);
 
 	}
 
@@ -294,6 +329,8 @@ public class PermuationSol {
 			cur.remove(cur.size() - 1);
 
 		}
+		
+		 
 
 	}
 

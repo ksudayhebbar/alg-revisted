@@ -49,9 +49,21 @@ public class JumpGame {
 	}
 
 	public static void main(String[] args) {
-		int[] num = { 2, 3, 1, 1, 4 };
-		System.out.println(jump2(num));
+		int[] num = { 3,2,1,0,4 };
+		System.out.println(canJump(num));
 
 	}
+	
+	public static boolean canJump(int[] nums) {
+        int i=0;
+        int reach=0;
+       for( ;i<nums.length && i<=reach ;i++){
+               
+    	   reach=Math.max(i+nums[i],reach);
+               
+       }
+   
+       return i==nums.length;
+}
 
 }

@@ -78,8 +78,8 @@ public class TicTacToe {
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	int []n1= {1,3};
+	int n2[]= {3};
 	}
 
 }

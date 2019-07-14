@@ -858,6 +858,8 @@ public class TreeSolution {
 		tree.run();
 	}
 
+	public static TreeNode pre = null;
+
 	private void run() {
 		TreeNode root = new TreeNode(40);
 
@@ -880,6 +882,8 @@ public class TreeSolution {
 		sleaf2.setLeft(leaf5);
 
 		sleaf2.setRight(leaf6);
+
+		// doubleLinkedList(root);
 
 		// System.err.println(kThSmallestElementR(root, 4));
 
@@ -933,31 +937,46 @@ public class TreeSolution {
 
 		// inorder(deserialize(serialize(root)));
 
-		/*
-		 * String serialize = serialize(root); String[] split = serialize.split(",");
-		 * TreeNode node = null; for (String v : split) {
-		 * 
-		 * if (!v.equals("#")) { if (node == null) { node = insert(node,
-		 * Integer.valueOf(v)); } else { insert(node, Integer.valueOf(v)); } }
-		 * 
-		 * }
-		 * 
-		 * inorder(node); TreeNode temp = node.left.right;
-		 * System.err.println(temp.value); System.out.println(inorderSuccessor(temp));
-		 */
-
 		// List<List<Integer>> leafs = new ArrayList<List<Integer>>();
 		// findleaves(leafs, root);
 
 		// System.err.println(leafs);
 
 		int[] t = { 1, 2, 3, 4, 5, 6 };
-		SumRangeTree buildSumRangeTree = buildSumRangeTree(t, 0, t.length - 1);
+		// SumRangeTree buildSumRangeTree = buildSumRangeTree(t, 0, t.length - 1);
 
-		System.out.println(sumofRanges(buildSumRangeTree, 0, 6));
-		updateSum(buildSumRangeTree, 10, 3);
+		// System.out.println(sumofRanges(buildSumRangeTree, 0, 6));
+		// updateSum(buildSumRangeTree, 10, 3);
 
-		System.out.println(sumofRanges(buildSumRangeTree, 0, 6));
+		// System.out.println(sumofRanges(buildSumRangeTree, 0, 6));
+		TreeNode r = new TreeNode(0);
+		r.left = new TreeNode(-4);
+		r.left.right = new TreeNode(-1);
+		r.left.right.right = new TreeNode(3);
+		r.left.right.right.left = new TreeNode(-2);
+		r.right = new TreeNode(-3);
+		r.right.left = new TreeNode(8);
+		r.right.left.right = new TreeNode(9);
+		r.right.left.right.left = new TreeNode(4);
+
+		// System.out.println(sumOfLeftLeaves(r));
+		/// diameterOfBinaryTree(r);
+		TreeNode r1 = new TreeNode(2);
+
+		r1.left = new TreeNode(1);
+		TreeNode p = new TreeNode(2);
+		TreeNode q = new TreeNode(2);
+		TreeNode s = lowestCommonAncestor(r1, p, q);
+		System.out.println(s.value);
+		
+		TreeNode z=new TreeNode(1);
+		TreeNode zl=new TreeNode(2);
+		TreeNode zr=new TreeNode(3);
+		z.setLeft(zl);	
+		z.setRight(zr);
+		zl.setLeft(new TreeNode(4));
+		zl.setRight(new TreeNode(5));
+		System.out.println(zigzagLevelOrder(z));
 
 	}
 
@@ -1135,7 +1154,7 @@ public class TreeSolution {
 			return;
 		int mid = root.getStart() + (root.getEnd() - root.getStart()) / 2;
 
-		if (root.getStart()==root.getEnd()&& root.getStart() == pos) {
+		if (root.getStart() == root.getEnd() && root.getStart() == pos) {
 			root.setSum(val);
 			return;
 		}
@@ -1152,7 +1171,7 @@ public class TreeSolution {
 		if (root == null)
 			return -1;
 		int mid = root.getStart() + (root.getEnd() - root.getStart()) / 2;
-		if (i<=root.getStart() && j>=root.getEnd()) {
+		if (i <= root.getStart() && j >= root.getEnd()) {
 			return root.getSum();
 		}
 		int res = 0;
@@ -1166,4 +1185,148 @@ public class TreeSolution {
 
 	}
 
+	public static void doubleLinkedList(TreeNode root) {
+		if (root != null) {
+			doubleLinkedList(root.getLeft());
+			if (pre == null) {
+				pre = root;
+			} else {
+				root.setLeft(pre);
+				pre.setRight(root);
+			}
+			pre = root;
+			doubleLinkedList(root.getRight());
+
+		}
+
+	}
+
+	public int sumOfLeftLeaves(TreeNode root) {
+
+		TreeNode cur = root;
+		Stack<TreeNode> st = new Stack<TreeNode>();
+
+		int retValue = 0;
+		while (cur != null || !st.isEmpty()) {
+
+			if (cur != null && cur.right != null) {
+				st.push(cur.right);
+
+			}
+
+			if (cur != null && cur.left == null && cur.right == null) {
+
+				retValue += cur.value;
+			}
+
+			if (cur != null && cur.left != null) {
+				cur = cur.left;
+
+			} else if (!st.isEmpty()) {
+				TreeNode pop = st.pop();
+				cur = pop.left;
+
+			} else {
+				cur = cur.left;
+			}
+
+		}
+
+		return retValue;
+	}
+
+	int diameter = 0;
+
+	public int diameterOfBinaryTree(TreeNode root) {
+		if (root == null)
+			return 0;
+
+		helper(root);
+		return diameter;
+	}
+
+	public int helper(TreeNode root) {
+		if (root == null)
+			return 0;
+
+		int left = diameterOfBinaryTree(root.left);
+		int right = diameterOfBinaryTree(root.right);
+		diameter = Math.max(diameter, left + right);
+
+		return Math.max(left, right) + 1;
+	}
+
+	public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+		if (root == null) {
+			return null;
+		}
+		if (root != null && root.value >= q.value && root.value <= q.value) {
+
+			return root;
+
+		}
+		TreeNode left = lowestCommonAncestor(root.left, p, q);
+		TreeNode right = lowestCommonAncestor(root.right, p, q);
+
+		return left != null ? left : right != null ? right : null;
+	}
+
+	public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+
+		if (root == null)
+			return new ArrayList<List<Integer>>();
+
+		Queue<Integer> level = new LinkedList<Integer>();
+		Queue<TreeNode> dfs = new LinkedList<TreeNode>();
+		Map<Integer, List<Integer>> result = new HashMap<Integer, List<Integer>>();
+
+		dfs.add(root);
+		level.add(1);
+		boolean dir = false;
+		while (!dfs.isEmpty()) {
+
+			TreeNode node = dfs.remove();
+			int l = level.remove();
+			if (result.get(l) != null) {
+				result.get(l).add(node.value);
+
+			} else {
+				List<Integer> temp = new ArrayList<Integer>();
+				temp.add(node.value);
+				result.put(l, temp);
+			}
+			if (dir) {
+				if (node != null && node.left != null) {
+					dfs.add(node.left);
+					level.add(l + 1);
+					dir = false;
+				}
+				if (node != null && node.right != null) {
+					dfs.add(node.right);
+					level.add(l + 1);
+					dir = false;
+
+				}
+				
+			} else {
+
+				if (node != null && node.right != null) {
+					dfs.add(node.right);
+					level.add(l + 1);
+					dir = true;
+				}
+				if (node != null && node.left != null) {
+					dfs.add(node.left);
+					level.add(l + 1);
+					dir = true;
+				}
+				
+
+			}
+
+		}
+
+		return new ArrayList<List<Integer>>(result.values());
+
+	}
 }

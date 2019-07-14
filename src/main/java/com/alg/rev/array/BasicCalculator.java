@@ -4,97 +4,58 @@ import java.util.Stack;
 
 public class BasicCalculator {
 
-	public static int calcaulate(String str) {
-
-		Stack<Integer> operand = new Stack<Integer>();
-		Stack<Character> operator = new Stack<Character>();
-		int inVaildParanthisCount = 0;
-		for (Character oneChar : str.toCharArray()) {
-
-			if (oneChar.equals(' '))
-				continue;
-
-			if (Character.isDigit(oneChar)) {
-				if (!operator.isEmpty() && (operator.peek().equals('+') || operator.peek().equals('-'))) {
-					addOperand(operand, operator, oneChar);
-
-				} else {
-
-					operand.push(Integer.valueOf(oneChar.toString()));
-				}
-
-			} else if (oneChar.equals('+') || oneChar.equals('-') || oneChar.equals('(')) {
-				if (oneChar.equals('(')) {
-					operator.push(oneChar);
-					inVaildParanthisCount++;
-				} else {
-					operator.push(oneChar);
-				}
-			} else if (oneChar.equals(')')) {
-				if (inVaildParanthisCount > 0) {
-					if (operator.peek().equals('(')) {
-						operator.pop();
-						inVaildParanthisCount--;
-					} else {
-
-						while (!operator.isEmpty() && !operator.peek().equals('(')) {
-							addOperand(operand, operator);
-						}
-						if (operator.peek().equals('(')) {
-							operator.pop();
-							inVaildParanthisCount--;
-						}
-					}
-				}else {
-					throw new IllegalArgumentException();
-				}
-
-			}
-
-		}
-
-		if (!operator.isEmpty()) {
-			throw new IllegalArgumentException();
-		}
-		return operand.pop().intValue();
-
-	}
-
-	private static void addOperand(Stack<Integer> operand, Stack<Character> operator) {
-		Character oneCharTemp = operator.pop();
-		if (oneCharTemp.equals('+') || oneCharTemp.equals('-')) {
-			if (oneCharTemp.equals('+')) {
-
-				Integer r = operand.pop() + operand.pop();
-
-				operand.push(r);
-
-			} else {
-				Integer r = operand.pop() - operand.pop();
-				operand.push(r);
-
-			}
-
-		}
-	}
-
-	private static void addOperand(Stack<Integer> operand, Stack<Character> operator, Character oneChar) {
-		Character tempOper = operator.pop();
-		if (tempOper.equals('+')) {
-
-			Integer r = operand.pop() + Integer.valueOf(oneChar.toString());
-
-			operand.push(r);
-
-		} else {
-			Integer r = operand.pop() - Integer.valueOf(oneChar.toString());
-			operand.push(r);
-
-		}
-	}
-
+	
 	public static void main(String[] args) {
-		System.out.println(calcaulate("((1+1)+(1+1)+(1+1)))"));
+			
+		System.out.println(calculate("3+2*2 "));
+	}
+
+	public static int calculate(String s) {
+		int num = 0;
+		s=s.trim();
+		Character sing='+';
+		Stack<Integer> st = new Stack<Integer>();
+		for (int i=0 ; i<s.length();i++) {
+			
+			if (Character.isWhitespace(s.charAt(i))) {
+				continue;
+			}
+
+			if (Character.isDigit(s.charAt(i))) {
+
+				num = num * 10 + s.charAt(i) - '0';
+			} 
+			if(!Character.isDigit(s.charAt(i)) || i==s.length()-1){
+
+				if (sing.equals('-')) {
+
+					num = num * -1;
+					st.push(num);
+
+				} else if (sing.equals('+')) {
+
+					st.push(num);
+
+				} else if (sing.equals('*')) {
+
+					st.push(st.pop() * num);
+				} else if (sing.equals('/')) {
+
+					st.push(st.pop() / num);
+				}
+				sing=s.charAt(i);
+				num = 0;
+
+			}
+
+		}
+		int result = 0;
+		while (!st.isEmpty()) {
+
+			result += st.pop();
+		}
+
+		return result;
 	}
 
 }

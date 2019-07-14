@@ -31,5 +31,4 @@ public class Interval {
 		return "Interval [start=" + start + ", end=" + end + "]";
 	}
 
-	
 }

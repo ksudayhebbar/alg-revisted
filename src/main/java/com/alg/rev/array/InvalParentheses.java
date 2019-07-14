@@ -15,7 +15,7 @@ public class InvalParentheses {
 			} else {
 
 				if (!st.isEmpty()) {
-					while (!st.isEmpty()&&st.peek().equals('(')) {
+					while (!st.isEmpty() && st.peek().equals('(')) {
 
 						res.append(st.pop());
 					}
@@ -30,7 +30,7 @@ public class InvalParentheses {
 	}
 
 	public static void main(String[] args) {
-	System.out.println(removeInvaildParantheses("()())()"));	
+		System.out.println(removeInvaildParantheses("()())()"));
 	}
 
 }

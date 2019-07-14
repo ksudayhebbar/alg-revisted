@@ -19,51 +19,42 @@ package com.alg.rev.array;
  * either.
  */
 
-public class GasSatation
-{
+public class GasSatation {
 
-    public int canCompleteCircuit(int[] cost, int[] gas)
-    {
+	public int canCompleteCircuit(int[] cost, int[] gas) {
 
-        int start = 0;
-        int remaining = 0;
-        int total = 0;
-        int sumRemaining = 0;
-        for (int i = 0; i < gas.length; i++)
-        {
-            remaining =  gas[i]-cost[i];
+		int start = 0;
+		int remaining = 0;
+		int total = 0;
+		int sumRemaining = 0;
+		for (int i = 0; i < gas.length; i++) {
+			remaining = gas[i] - cost[i];
 
-            if (sumRemaining >= 0)
-            {
+			if (sumRemaining >= 0) {
 
-                sumRemaining += remaining;
-            } else
-            {
-                sumRemaining = remaining;
-                start = i;
+				sumRemaining += remaining;
+			} else {
+				sumRemaining = remaining;
+				start = i;
 
-            }
-            total += remaining;
+			}
+			total += remaining;
 
-        }
+		}
 
-        if (total >= 0)
-        {
-            return start;
-        }
+		if (total >= 0) {
+			return start;
+		}
 
-        return -1;
+		return -1;
 
-    }
+	}
 
-    public static void main(String[] args)
-    {
-        GasSatation gasSatation = new GasSatation();
-        int[] cost =
-        { 2, 3, 2, 4, 5 };
-        int[] gas =
-        { 1, 2, 3, 4, 5 };
-        gasSatation.canCompleteCircuit(cost, gas);
-    }
+	public static void main(String[] args) {
+		GasSatation gasSatation = new GasSatation();
+		int[] cost = { 2, 3, 2, 4, 5 };
+		int[] gas = { 1, 2, 3, 4, 5 };
+		gasSatation.canCompleteCircuit(cost, gas);
+	}
 
 }

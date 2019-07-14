@@ -46,8 +46,8 @@ public class Permuation
     public static void main(String[] args)
     {
         Permuation permuation1 = new Permuation();
-        System.out.println(permuation1.getPerm("ABC"));
-        permuation1.permuation("", "ABC");
+        //System.out.println(permuation1.getPerm("ABC"));
+       permuation1.permuation("", "as");
     }
 
     public void permuation(String prefix, String input)
@@ -68,5 +68,8 @@ public class Permuation
         }
 
     }
+    
+    
+    
 
 }

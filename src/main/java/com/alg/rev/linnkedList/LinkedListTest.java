@@ -209,9 +209,9 @@ public class LinkedListTest {
 
 		// print(removeElements(n2, 6));
 
-		// print(swapNodesPairs2(n1));
+		print(swapNodesPairs2(n1));
 
-		print(reverseKthgroupoNodes(n1, 3));
+		//print(reverseKthgroupoNodes(n1, 3));
 	}
 
 }

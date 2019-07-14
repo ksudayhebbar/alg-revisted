@@ -1,5 +1,7 @@
 package com.alg.rev.array;
 
+import java.util.Arrays;
+
 public class RemoveDups
 {
 
@@ -10,9 +12,10 @@ public class RemoveDups
  
         int prev = 0; // point to previous
         int curr = 1; // point to current
+       
  
         while (curr < A.length) {
-            if (A[curr] == A[prev] && A[curr] == A[prev - 1]) {
+            if (A[curr] == A[prev] && ( prev-1 < 0 || A[curr] != A[prev - 1])) {
                 curr++;
             } else {
                 prev++;
@@ -20,13 +23,17 @@ public class RemoveDups
                 curr++;
             }
         }
+       
+        
+       
+        
  
         return prev + 1;
     }
     
     public static void main(String[] args)
     {
-        int []a={1,2,2,3,3,4,4,4,5,6};
+        int []a={1,1,1,2,3,3,4,4,4,5,6};
         RemoveDups.removeDuplicates(a);
     }
 }

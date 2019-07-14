@@ -25,7 +25,7 @@ public class HouseRober {
 		for (int i = start + 2; i < end; i++) {
 			dp[i] = Math.max(dp[i - 2] + house[i], dp[i - 1]);
 		}
-		return dp[end-1];
+		return dp[end - 1];
 
 	}
 

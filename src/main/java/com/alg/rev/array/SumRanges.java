@@ -2,32 +2,28 @@ package com.alg.rev.array;
 
 public class SumRanges {
 	private int[] num;
+	private int sum[];
 
 	public SumRanges(int[] num) {
 		super();
-
-		for (int i = 1; i < num.length; i++) {
-			num[i - 1] += num[i];
+		sum=new int [num.length+1];
+		for (int i = 0; i < num.length; i++) {
+			sum[i +1] += sum[i]+num[i];
 
 		}
 		this.num = num;
 	}
 
 	public int ranges(int i, int j) {
-		int res = -1;
-		if (i >= 0 && j <= num.length-1) {
-
-			res = num[i] + num[j];
-
-		}
-		return res;
+		
+		return sum[j+1]-sum[i];
 
 	}
 
 	public static void main(String[] args) {
 		int a[] = { 1, 2, 3, 4, 5 };
 		SumRanges s = new SumRanges(a);
-		System.out.println(s.ranges(0, 4));
+		System.out.println(s.ranges(0, 0));
 
 	}
 

@@ -37,14 +37,49 @@ public class NumberOfIsLand {
 	}
 
 	public static void main(String[] args) {
-		int[][] m = { 
-				{ 1, 1, 0, 0, 0 }, 
-				{ 1, 1, 0, 1, 0 }, 
-				{ 1, 1, 0, 0, 0 }, 
-				{ 0, 0, 1, 0, 0 }
+		int[][] m = { { 1, 1, 0, 0, 0 }, { 1, 1, 0, 1, 0 }, { 1, 1, 0, 0, 0 }, { 0, 0, 1, 0, 0 }
 
 		};
-		System.out.println(isLand(m));
+		// System.out.println(isLand(m));
+		int m2[][] = { { 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0 },
+				{ 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0 },
+				{ 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0 } };
+		System.out.println(maxAreaOfIsland(m2));
+	}
+
+	public static int maxAreaOfIsland(int[][] grid) {
+		int rows = grid.length;
+		int cols = grid.length-1;
+		int max = 0;
+		for (int r = 0; r < rows; r++) {
+
+			for (int c = 0; c < cols; c++) {
+
+				if (grid[r][c] == 1) {
+
+					int shapeCount = searchTwo(grid, r, c);
+
+					max = Math.max(max, shapeCount);
+
+				}
+			}
+		}
+
+		return max;
+	}
+
+	public static int searchTwo(int[][] grid, int r, int c) {
+
+		if (r < 0 || r >= grid.length || c < 0 || c >= grid[0].length - 1 || grid[r][c] == -1 || grid[r][c] == 0) {
+			return 0;
+		}
+
+		grid[r][c] = -1;
+
+		return searchTwo(grid, r + 1, c) + searchTwo(grid, r - 1, c) + searchTwo(grid, r, c + 1)
+				+ searchTwo(grid, r, c - 1) + 1;
+
 	}
 
 }

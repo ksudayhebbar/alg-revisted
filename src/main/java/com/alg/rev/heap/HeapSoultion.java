@@ -1,8 +1,11 @@
 package com.alg.rev.heap;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Random;
 
@@ -66,14 +69,14 @@ public class HeapSoultion {
 
 		Random random = new Random();
 		HeapSoultion heapSoultion = new HeapSoultion();
-		int i = 0;
-		while (i < 10) {
-			int t = random.nextInt(100);
-			heapSoultion.addNum(t);
-
-			System.out.println(heapSoultion.findMedian());
-		}
-
+		/*
+		 * int i = 0; while (i < 10) { int t = random.nextInt(100);
+		 * heapSoultion.addNum(t);
+		 * 
+		 * System.out.println(heapSoultion.findMedian()); }
+		 */
+		heapSoultion.topKFrequentWords(
+				new String[] { "i", "love", "leetcode", "i", "love", "coding" }, 2);
 	}
 
 	public class Interval implements Comparable<Interval> {
@@ -103,6 +106,49 @@ public class HeapSoultion {
 
 	}
 
-	
+	public List<String> topKFrequentWords(String[] words, int k) {
+
+		List<String> retList = new ArrayList<String>();
+		Map<String, Integer> counter = new HashMap<String, Integer>();
+
+		for (String S : words) {
+			counter.put(S, counter.getOrDefault(S, 1) + 1);
+		}
+
+		PriorityQueue<String> heap = new PriorityQueue<String>(new ValueCompare(counter));
+
+		for (String s : counter.keySet()) {
+			heap.offer(s);
+
+		}
+		
+		while (k > 0) {
+
+			retList.add(heap.poll());
+			k--;
+
+		}
+		return retList;
+
+	}
+
+	public class ValueCompare implements Comparator<String> {
+		private Map<String, Integer> sorter = new HashMap<String, Integer>();
+
+		public ValueCompare(Map<String, Integer> counter) {
+			sorter.putAll(counter);
+		}
+
+		public int compare(String o1, String o2) {
+			if (sorter.get(o2) != sorter.get(o1)) {
+				return sorter.get(o2) - sorter.get(o1);
+			} else {
+
+				return o1.compareTo(o2);
+			}
+
+		}
+
+	}
 
 }

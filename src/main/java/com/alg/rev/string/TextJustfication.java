@@ -99,7 +99,7 @@ public class TextJustfication {
 			}
 		}
 
-		int lastLen = 0;
+		
 		StringBuilder sb = new StringBuilder();
 
 		for (int i = last; i < words.length - 1; i++) {
@@ -108,7 +108,7 @@ public class TextJustfication {
 		}
 
 		sb.append(words[words.length - 1]);
-		int d = 0;
+
 		while (sb.length() < maxWidth) {
 			sb.append(" ");
 		}
