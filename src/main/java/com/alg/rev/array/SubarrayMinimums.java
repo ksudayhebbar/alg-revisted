@@ -26,16 +26,6 @@ public class SubarrayMinimums {
 		return sum;
 	}
 
-	public void helper(int[] A, int s, LinkedList<Integer> cur) {
-		System.out.println(cur);
-		sum += cur.isEmpty() ? 0 : cur.stream().min(Comparator.comparing(Integer::valueOf)).get();
-		for (int i = s; i < A.length; i++) {
-			cur.add(A[i]);
-			helper(A, i + 1, new LinkedList<Integer>(cur));
-			cur.removeLast();
-		}
-	}
-
 	public static void main(String[] args) {
 		/*
 		 * SubarrayMinimums s = new SubarrayMinimums(); s.sumSubarrayMins(new int[] { 3,
@@ -52,15 +42,14 @@ public class SubarrayMinimums {
 			if (listA[i] != listB[j]) {
 				ans.add(listA[i]);
 				i++;
-				
 
 			} else if (listA[i] != listB[j]) {
 				i++;
 				j++;
 
-			}else if (listA[i] > listB[j]) {
+			} else if (listA[i] > listB[j]) {
 				j++;
-			}else if (listA[i] < listB[j]) {
+			} else if (listA[i] < listB[j]) {
 				i++;
 			}
 

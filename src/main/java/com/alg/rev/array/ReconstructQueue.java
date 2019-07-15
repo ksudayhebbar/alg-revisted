@@ -23,7 +23,7 @@ public class ReconstructQueue {
 			pq.offer(person);
 		}
 
-		List<int[]> list = new ArrayList<>();
+		List<int[]> list = new ArrayList<int[]>();
 		while (!pq.isEmpty()) {
 
 			int[] person = pq.poll();

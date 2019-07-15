@@ -1,13 +1,12 @@
 package com.alg.rev.array;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 public class FindClosestKElements {
-	public List<Integer> findClosestElements(int[] arr, int k, int x) {
+	public List<Integer> findClosestElements(int[] arr, int k, final int x) {
 
 		List<Integer> ret = new ArrayList<Integer>();
 		List<Integer> nums = new ArrayList<Integer>();
@@ -18,7 +17,6 @@ public class FindClosestKElements {
 
 		Collections.sort(nums, new Comparator<Integer>() {
 
-			@Override
 			public int compare(Integer f, Integer s) {
 				return Math.abs(f - x) - Math.abs(s - x);
 			}
